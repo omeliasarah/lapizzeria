@@ -1,6 +1,9 @@
-<!-- Template Name: Our Specialties -->
+<?php
+/*
+* Template Name: Our Specialties
+*/
 
-<?php get_header(); ?>
+ get_header(); ?>
 
 <?php while(have_posts()): the_post(); ?>
 <div class="hero" style="background-image:url(<?php echo get_the_post_thumbnail_url(); ?>);">

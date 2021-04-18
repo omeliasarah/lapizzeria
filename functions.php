@@ -1,4 +1,12 @@
 <?php
+// Link or impor the database.php file
+require get_template_directory() . '/inc/database.php';
+
+// Handels the submission to the database
+require get_template_directory() . '/inc/reservations.php';
+
+// Creates option pages for the theme
+require get_template_directory() . '/inc/options.php';
 
 function lapizzeria_setup() {
   add_theme_support('post-thumbnails');
@@ -8,10 +16,9 @@ function lapizzeria_setup() {
   update_option('thumbnail_size_h', 164);
 }
 add_action('after_setup_theme', 'lapizzeria_setup');
-
 function lapizzeria_styles(){
     // adding stylesheets
-    wp_register_style('googlefont', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700|Raleway:400,700,900', array(), '1.0.0');
+    wp_register_style('googlefont', 'https://fonts.googleapis.com/css?family=Open+Sans:400,700%7CRaleway:400,700,900', array(), '1.0.0');
     wp_register_style('normalize', get_template_directory_uri() . '/css/normalize.css', array(), '6.0.0');
     wp_register_style('fluidboxcss', get_template_directory_uri() . '/css/fluidbox.min.css', array(), '6.0.0');
     wp_register_style('fontawesome', get_template_directory_uri() . '/css/font-awesome.css', array(), '4.7.0');
@@ -22,7 +29,6 @@ function lapizzeria_styles(){
     wp_enqueue_style('fontawesome');
     wp_enqueue_style('googlefont');
     wp_enqueue_style('style');
-
     wp_register_script('fluidboxjs', get_template_directory_uri() . '/js/jquery.fluidbox.min.js', array('jquery', 'debounce'), '1.0.0', true );
     wp_register_script('debounce', '//cdnjs.cloudflare.com/ajax/libs/jquery-throttle-debounce/1.1/jquery.ba-throttle-debounce.min.js', array('jquery'), '1.0.0', true);
     wp_register_script('script', get_template_directory_uri() . '/js/scripts.js', array('jquery'), '1.0.0', true);
@@ -31,10 +37,8 @@ function lapizzeria_styles(){
     wp_enqueue_script('fluidboxjs');
     wp_enqueue_script('debounce');
     wp_enqueue_script('script');
-
 }
 add_action('wp_enqueue_scripts', 'lapizzeria_styles');
-
 // Add Menus
 function lapizzeria_menus(){
   register_nav_menus(array(
@@ -43,9 +47,7 @@ function lapizzeria_menus(){
   ) );
 }
 add_action('init', 'lapizzeria_menus');
-
 //pizzas
-
 function lapizzeria_specialties() {
 $labels = array(
 'name'               => _x( 'Pizzas', 'lapizzeria' ),
@@ -63,7 +65,6 @@ $labels = array(
 'not_found'          => __( 'No Pizzas found.', 'lapizzeria' ),
 'not_found_in_trash' => __( 'No Pizzas found in Trash.', 'lapizzeria' )
 );
-
 $args = array(
 'labels'             => $labels,
     'description'        => __( 'Description.', 'lapizzeria' ),
@@ -80,14 +81,10 @@ $args = array(
 'supports'           => array( 'title', 'editor', 'thumbnail' ),
     'taxonomies'          => array( 'category' ),
 );
-
 register_post_type( 'specialties', $args );
 }
-
 add_action( 'init', 'lapizzeria_specialties' );
-
 /** Widget Zone **/
-
 function lapizzeria_widgets() {
   register_sidebar( array(
     'name'  => 'Blog Sidebar',
@@ -97,7 +94,6 @@ function lapizzeria_widgets() {
     'before_title'   => '<h3>',
     'after_title'  =>  '</h3>'
    )
-
   );
 }
 add_action('widgets_init', 'lapizzeria_widgets');
