@@ -11,7 +11,7 @@
 
 <div class="main-content container">
     <main class="text-center content-text">
-        <div class="entry-inforomation clear">
+        <div class="entry-information clear">
             <div class="date">
                 <time>
                     <?php echo the_time('d'); ?>
