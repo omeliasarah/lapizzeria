@@ -11,6 +11,7 @@
         </div>
     </div>
 </div>
+<?php endwhile; ?>
 
 <div class="main-content container">
     <main class="container-grid clear">
@@ -34,13 +35,50 @@
                 </div>
             </div>
         </div>
-
-
         <?php endwhile; wp_reset_postdata(); ?>
 
     </main>
 </div>
 
-<?php endwhile; ?>
+<section class="ingredients">
+    <div class="container">
+        <div class="container-grid">
+            <?php while(have_posts()): the_post(); ?>
+            <div class="columns2-4">
+                <h3><?php the_field('ingredients'); ?></h3>
+                <?php the_field('ingredients_text'); ?>
+                <?php $url = get_page_by_title('About Us'); ?>
+                <a class="button primary" href="<?php echo get_permalink($url->ID);  ?>">read more</a>
+            </div>
+
+            <div class="columns2-4 image">
+                <img src="<?php the_field('image'); ?>" alt="Fresh Ingredients">
+            </div>
+
+            <?php endwhile; ?>
+        </div>
+    </div>
+</section>
+
+<section class="container clear">
+    <h2 class="primary-text text-center">Gallery</h2>
+    <?php
+            $url = get_page_by_title('Gallery');
+            echo get_post_gallery($url->ID);
+           ?>
+</section>
+
+<section class="location-reservation clear container">
+    <div class="container-grid">
+        <div class="columns2-4">
+            <div id="map">
+                map here
+            </div>
+        </div>
+        <div class="columns2-4">
+            <?php get_template_part('templates/reservation', 'form'); ?>
+        </div>
+    </div>
+</section>
 
 <?php get_footer(); ?>
