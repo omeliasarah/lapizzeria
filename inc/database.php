@@ -24,4 +24,6 @@ function lapizzeria_database(){
     require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
     dbDelta($sql);
 }
+
 add_action('after_setup_theme', 'lapizzeria_database');
+

@@ -1,23 +1,31 @@
+var map;
+function initMap() {
+  map = new google.maps.Map(document.getElementById("map"), {
+    center: { lat: -34.397, lng: 150.644 },
+    zoom: 8,
+  });
+}
 $ = jQuery.noConflict();
 $(document).ready(function () {
-  //Menu Button
+  $("html").removeClass("csscolumns");
+
+  // Menu button
   $(".mobile-menu a").on("click", function () {
     $("nav.site-nav").toggle("slow");
   });
-  //Show the Mobile Menu
-  var breakpoint = 768;
+
+  // Show the mobile menu
+  var breakPoint = 768;
   $(window).resize(function () {
-    boxAdjustment();
-    if ($(document).width() >= breakpoint) {
+    if ($(document).width() >= breakPoint) {
       $("nav.site-nav").show();
     } else {
       $("nav.site-nav").hide();
     }
   });
 
-  boxAdjustment();
+  // Fluid box plugin
 
-  //Fluidbox Plugin
   jQuery(".blocks-gallery-item a").each(function () {
     jQuery(this).attr({ "data-fluidbox": "" });
   });
@@ -26,14 +34,30 @@ $(document).ready(function () {
     jQuery("[data-fluidbox]").fluidbox();
   }
 });
-//Adapt the height of images to the div elements
-function boxAdjustment() {
-  var images = $(".box-image");
-  if (images.length > 0) {
-    var imageHeight = images[0].height;
-    var boxes = $(".content-box");
-    $(boxes).each(function (i, element) {
-      $(element).css({ height: imageHeight + "px" });
-    });
+// Adapt the map
+var map = $("#map");
+var breakPoint = 900;
+if (map.length > 0) {
+  if ($(document).width() >= breakPoint) {
+    displayMap(0);
+  } else {
+    displayMap(300);
+  }
+}
+$(window).resize(function () {
+  if ($(document).width() >= breakPoint) {
+    displayMap(0);
+  } else {
+    displayMap(300);
+  }
+});
+
+function displayMap(value) {
+  if (value == 0) {
+    var locationSection = $(".location-reservation");
+    var locationHeight = locationSection.height();
+    $("#map").css({ height: locationHeight });
+  } else {
+    $("#map").css({ height: value });
   }
 }
